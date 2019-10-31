@@ -19,14 +19,23 @@ function operate(operator, a, b){
 }
 
 let numArr =[];
+let finalNumInput = '';
 
 function updateDisplay(e){
     if(this.value == 'equals') {
+        if(finalNumInput) {
+            numArr.push(+finalNumInput);
+            finalNumInput = '';
+        }
         orderOfOperations(numArr)
     } else if(this.value == 'clear') {
         numArr = [];
         display.value = null;
     } else if(this.classList.contains("operator")){
+        if(finalNumInput) {
+            numArr.push(+finalNumInput);
+            finalNumInput = '';
+        }
             switch(true){
                 case this.value == "+":
                     display.value += this.value;
@@ -46,8 +55,8 @@ function updateDisplay(e){
                     break; 
             }
     } else {
-            display.value += this.value;
-            numArr.push(+this.value);
+        display.value += this.value;
+        finalNumInput+= this.value;
     }
 }
 
